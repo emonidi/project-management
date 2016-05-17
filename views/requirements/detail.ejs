@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4><%= story.project.name + ': ' + story.name %></h4>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-12">
+          <p><%= story.description %></p>
+        </div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3">
+          <strong>Assigned to:</strong>
+          <div>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="assigned_to">
+              <%= story.assigned_to ? story.assigned_to.name + ' ' + story.assigned_to.surname : 'Unassigned'%>
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="assigned_to">
+              <% users.forEach(function(user){ %>
+                <li><a href="/stories/<%=story.id%>/edit?assigned_to=<%= user.id%>"><%= user.name + ' ' + user.surname%></a></li>
+              <%})%>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <strong>Status:</strong>
+          <div>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="status">
+              <%= story.status.replace('_', ' ').toUpperCase() %>
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="staus">
+              <% status.forEach(function(status){ %>
+              <li><a href="/stories/<%=story.id%>/edit?status=<%= status%>"><%=status%></a></li>
+              <%})%>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <strong>Story points:</strong>
+          <div>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="story_points">
+              <%= story.story_points %>
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="story_points">
+                <%for(var i = 0; i<=5;i++){%>
+                  <li><a href="/stories/<%= story.id %>/edit?story_points=<%=i%>"><%= i %></a></li>
+                <%}%>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <strong>Priority:</strong>
+          <div>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="priority">
+              <%= priority[story.priority] %>
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="priority">
+              <%priority.forEach(function(priority,index){%>
+              <li><a href="/stories/<%= story.id %>/edit?priority=<%=index%>"><%= priority %></a></li>
+              <%})%>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-2">
+          <a href="/tasks/add?story_id=<%= story.id%>" class="btn btn-success">Add New Task</a>
+        </div>
+        <div class="col-md-1">
+          <a href="/stories/<%=story.id%>/edit_view" class="btn btn-info">Edit</a>
+        </div>
+        <div class="col-md-1">
+          <a href="/stories/delete/<%=story.id%>" class="btn btn-danger">Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

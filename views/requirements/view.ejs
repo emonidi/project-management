@@ -1,0 +1,100 @@
+<div class="container">
+  <div class="col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4>Filter</h4>
+      </div>
+      <div class="panel-body">
+          <form class="form" method="get" action="">
+            <div class="form-group">
+              <label>Project</label>
+              <select name="project" class="form-control">
+                <option value="">All</option>
+                <% filterVals.projects.forEach(function(req){%>
+                    <option value="<%= req.id%>" <%= parseInt(filters.project) === req.id ? 'selected' : ''%>>
+                      <%= req.name%>
+                    </option>
+                <%})%>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Assigned to:</label>
+              <select name="assigned_to" class="form-control">
+                <option value="">All</option>
+                <%filterVals.users.forEach(function(user){ %>
+                  <option value="<%= user.id %>" <%=parseInt(filters.assigned_to) === user.id ? 'selected':''%>>
+                    <%= user.name + ' ' + user.surname %>
+                  </option>
+                <%})%>
+              </select>
+            </div>
+            <div class="form-roup">
+              <label>Priority:</label>
+              <select name="priority" class="form-control">
+                <option value="">All</option>
+                <% filterVals.priority.forEach(function(prio,index){%>
+                  <option value="<%= index %>" <%if(index === parseInt(filters.priority)){ %> selected="true" <%}%>>
+                    <%= prio %>
+                  </option>
+                <%})%>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Status:</label>
+              <select class="form-control" name="status">
+                <option value="">All</option>
+                <% filterVals.status.forEach(function(status){%>
+                  <option <%if(filters.status === status.replace(' ','_').toLowerCase()) {%> selected="true" <%}%> value="<%= status.replace(' ', '_').toLowerCase() %>">
+                    <%= status %>
+                  </option>
+                <%})%>
+              </select>
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-5">
+                  <input type="submit" class="btn btn-primary" value="Filter">
+                </div>
+                <div class="col-md-6">
+                  <a href="/stories" class="btn btn-info">Reset Filter</a>
+                </div>
+              </div>
+            </div>
+          </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-9">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4>Project Backlog</h4>
+      </div>
+      <div class="panel-body">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Project</th>
+            <th>Assigned to</th>
+            <th>Priority</th>
+            <th>Status</th>
+            <th>Story Points</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% requirements.forEach(function(req){ %>
+          <tr>
+            <td><a href="/stories/<%=req.id%>"><%= req.name%></a></td>
+            <td><%= req.project ? req.project.name : '' %></td>
+            <td><%= req.assigned_to ? req.assigned_to.name : 'Unassigned'%></td>
+            <td><%= req.priority%></td>
+            <td><%= req.status.replace('_', ' ').toUpperCase()%></td>
+            <td><%= req.story_points%></td>
+          </tr>
+          <%})%>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

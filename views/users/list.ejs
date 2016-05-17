@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    <div class="panel panel-info">
+      <div class="panel-heading">System Users</div>
+      <div class="panel-body">
+        <ul>
+          <%data.forEach(function(item){%>
+          <li><a href="/users/<%= item.id %>"><%= item.name + ' ' + item.surname %></a> </li>
+          <%})%>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

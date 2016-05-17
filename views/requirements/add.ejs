@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4><%= selects.id ? 'Edit' : 'New' %> Story</h4>
+        </div>
+        <div class="panel-body">
+          <form class="form" method="post" action="/stories/<%= selects.id ? selects.id+'/update': 'add'%>">
+            <div class="form-group">
+               <label>Project:</label>
+               <select name="project" class="form-control">
+                  <% projects.forEach(function(project,index){ %>
+                    <% if(selects.project && project.id===parseInt(selects.project)){%>
+                        <option selected="true" value="<%= project.id %>"><%= project.name %></option>
+                   <%}else{%>
+                      <option value="<%= project.id %>"><%= project.name %></option>
+                    <%}%>
+                 <%})%>
+               </select>
+            </div>
+            <div class="form-group">
+              <label>Name:</label>
+              <input value="<%= selects.name ? selects.name : ''%>" type="text" name="name" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Description</label>
+              <textarea class="form-control" rows="5" name="description"><%= selects.description ? selects.description : ''%></textarea>
+            </div>
+            <div class="form-group">
+              <label>Priority:</label>
+              <select name="priority" class="form-control">
+                <%priority.forEach(function(prio,index){%>
+                  <option <%= selects.priority && selects.priority === index ? 'selected' : ''%> value="<%= index %>"><%= prio%></option>
+                <%})%>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Story Points</label>
+              <input type="number" name="story_points" class="form-control" value="<%= selects.story_points ? selects.story_points : '0'%>"/>
+            </div>
+            <div class="form-group">
+              <label>Status</label>
+              <select name="status" class="form-control">
+                <%status.forEach(function(status){%>
+                <option <%= selects.status && selects.status === status ? 'selected' : ''%> value="<%= status.replace(' ','_').toLowerCase() %>"><%= status %></option>
+                <%})%>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Assigned to:</label>
+
+              <select name="assigned_to" class="form-control">
+                <option value="0">Unassigned</option>
+                <%users.forEach(function(user){%>
+                  <option <%= selects.assigned_to == user.id ? 'selected' : ''%> value="<%= user.id%>"><%= user.name + ' ' + user.surname%></option>
+                <%})%>
+              </select>
+            </div>
+            <div class="form-group">
+              <input class="btn btn-primary" type="submit" value="submit">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

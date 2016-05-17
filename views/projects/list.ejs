@@ -1,0 +1,37 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4>Projects List</h4>
+				</div>
+				<div class="panel-body">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<td>Project Name</td>
+							</tr>
+						</thead>
+						<tbody>
+							<% data.forEach(function(item){%> 
+								<tr>
+									<td><a href="/projects/<%= item.id %>"><%= item.name %></a><td>
+									<td><a class='btn btn-success' href="/projects/<%= item.id %>/add_user">Add User</a><td>
+									<td><a class="btn btn-primary">View Stats</a></td>
+									<td><a class="btn btn-info" href="/projects/<%= item.id %>/edit">Edit</a></td>
+								</tr>
+							<%})%>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="well">
+	<div class="row">
+		<div class="col-md-12">
+			<a class="btn btn-success" href="/projects/new">Add New Project</a>
+		</div>
+	</div>
+	</div>
+</div>

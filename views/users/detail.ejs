@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+         <div class="row">
+            <div class="col-md-1">
+              <div class="thumbnail thumbnail-small">
+                 <img src="http://balgar.bg/wp-content/uploads/balgar_fb_image.jpg"/>
+              </div>
+            </div>
+            <div class="col-md-10">
+               <h2> <%= data.name + ' ' + data.surname%></h2>
+            </div>
+         </div>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-12">
+              <table class="table">
+                <thead>
+                <td>Name</td>
+                <td>Surname</td>
+                <td>Username</td>
+                <td>Email</td>
+                </thead>
+                <tbody>
+                <td><%= data.name %></td>
+                <td><%= data.surname %></td>
+                <td><%= data.username %></td>
+                <td><%= data.email %></td>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <a href="/users/delete/<%= data.id%>" class="btn btn-danger">Delete</a>
+
+              <a href="/users/update/<%= data.id%>" class="btn btn-primary">Update</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
