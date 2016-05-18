@@ -82,4 +82,29 @@
       </div>
     </div>
   </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4>Tasks to this story</h4>
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Name:</th>
+              <th>Est. Duration</th>
+              <th>Assigned to:</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% story.tasks.forEach(function(task){%>
+              <tr>
+                <td><%= task.task%></td>
+                <td><%= task.estimated_duration%> h</td>
+                <td><%= task.assigned_to ? users[task.assigned_to].name : 'Unassigned' %></td>
+              </tr>
+            <%})%>
+          </tbody>
+        </table>
+    </div>
+  </div>
 </div>

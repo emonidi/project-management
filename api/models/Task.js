@@ -28,6 +28,9 @@ module.exports = {
     project:{
       collection:'project',
       via:'tasks'
+    },
+    assigned_to:{
+      model:'user'
     }
   }
 };

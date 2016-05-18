@@ -11,13 +11,12 @@ module.exports = {
 	add_view:function(req,res){
     auth(req,res,function(){
       var story_id = req.query.story_id;
-      Requirement.findOneById(story_id).exec(function(err,story){
-        if(!err){
-          res.view('tasks/add',{story:story});
-        }else{
+      Promise.all([getRequirement(story_id), getUsers()])
+        .then(function(data){
+          res.view('tasks/add',{story:data[0],users:data[1]});
+        },function(err){
           res.json(err);
-        }
-      })
+        })
     });
   },
   add:function(req,res){
@@ -34,6 +33,31 @@ module.exports = {
     });
   }
 };
+
+function getUsers(){
+  return new Promise(function(resolve, reject){
+    User.find().exec(function(err,data){
+      console.log(data)
+      if(!err){
+        resolve(data);
+      }else{
+        reject(err);
+      }
+    });
+  })
+}
+function getRequirement(id){
+  return new Promise(function(resolve, reject){
+    Requirement.findOneById(id).exec(function(err,story){
+
+      if(!err){
+        resolve(story);
+      }else{
+        reject(err);
+      }
+    })
+  })
+}
 
 
 

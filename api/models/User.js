@@ -37,6 +37,10 @@ module.exports = {
      ongoing_stories:{
         collection:'requirement',
         via:'assigned_to'
+     },
+     tasks:{
+       collection:'task',
+       via:'assigned_to'
      }
   }
 };

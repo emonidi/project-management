@@ -111,6 +111,7 @@ module.exports = {
             status:d[2],
             users: d[3]
           }
+
           res.view('requirements/detail',data);
         })
       })
